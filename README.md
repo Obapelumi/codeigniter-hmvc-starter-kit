@@ -10,7 +10,7 @@ I started this project to track my Learning of Code Igniter. Coming from a backg
 This middleware Library is modelled after [Laravel](https://laravel.com)'s Middleware System. It provisions access control for Routes and Controller Functions
 
 ### Usage
-1. Copy the application/libraries/Middleware.php file from this repo and paste in the same directory of your CodeIgniter installation. You can either Autoload the Library or Load it Manually in your Constructor.
+1. Copy the ````application/libraries/Middleware.php```` file from this repo and paste in the same directory of your CodeIgniter installation. You can either Autoload the Library or Load it Manually in your Constructor.
 
 ````php
 // config/autoload.php
