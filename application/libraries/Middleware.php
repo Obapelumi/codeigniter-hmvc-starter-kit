@@ -33,15 +33,8 @@ class Middleware {
 	 * @return bool
 	 */
 	public function run () {
-		$routes = array_keys($this->middlewares_from_config);
-
-		if (array_key_exists($this->current_route, $this->middlewares_from_config)) {
-			$applicable_middlewares = $this->middlewares_from_config[$this->current_route];
-			return $this->execute_middlewares($applicable_middlewares);
-		}
-		else {
-			return true;
-		}
+		$middlewares = $this->get_applicable_middlewares();
+		return $this->execute_middlewares($middlewares);
 	}
 
 	/**
@@ -67,7 +60,7 @@ class Middleware {
 	 * @param array $functionNames to be exempted from middleware checks
 	 * @return bool
 	 */
-	public function except (array $middlewares, array $functionNames) {
+	public function except (array $middlewares, array $functionNames = []) {
 		if (! in_array($this->current_method_name, $functionNames)) {
 			return $this->execute_middlewares($middlewares);
 		}
@@ -109,7 +102,19 @@ class Middleware {
 	}
 
 	private function get_applicable_middlewares () {
-		return $this->middlewares_from_config[$this->current_route];
+		if (array_key_exists($this->current_route, $this->middlewares_from_config)) {
+			$applicable_middlewares = $this->middlewares_from_config[$this->current_route];
+			return $this->execute_middlewares($applicable_middlewares);
+		}
+		else {
+			foreach ($this->middlewares_from_config as $route => $middlewares) {
+				$route_string_length = strlen($route);
+				$characters_to_check = substr($this->current_route, 0, $route_string_length);
+				if (strpos($route, $characters_to_check) !== false) {
+					return $middlewares;
+				}
+			}
+		}
 	}
 
 	private function initialize_attributes () {
