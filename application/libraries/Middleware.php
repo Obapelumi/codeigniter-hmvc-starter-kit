@@ -113,6 +113,9 @@ class Middleware {
 				if (strpos($route, $characters_to_check) !== false) {
 					return $middlewares;
 				}
+				else {
+					return [];
+				}
 			}
 		}
 	}
