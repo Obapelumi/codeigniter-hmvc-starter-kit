@@ -1,4 +1,4 @@
-# Code Igniter Blog With HMVC and Middleware Implementation
+# Code Igniter Blog Example With HMVC, Middleware & Orm Implementation
 I started this project to track my Learning of Code Igniter. Coming from a background with [Laravel](https://laravel.com) I like the simplicity of CodeIgniter but there are a lot of things not supported out of the box. 
 
 ## Features
